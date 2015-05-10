@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.zdworks.lockscreensmallapp"
+	android:versionCode="3"
+	android:versionName="1.11" >
+
+	<uses-sdk
+		android:minSdkVersion="16"
+		android:targetSdkVersion="19" />
+	
+	<uses-permission android:name="com.sony.smallapp.permission.SMALLAPP" />
+
+	<application
+		android:allowBackup="true"
+		android:icon="@drawable/smallapp_launcher"
+		android:label="@string/app_name"
+		android:theme="@style/AppBaseTheme" >
+		
+			<uses-library android:name="com.sony.smallapp.framework" />
+		
+		<receiver
+            android:name="AdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/admin" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+		
+		<service
+            android:name="LockSmallMain"
+            android:icon="@drawable/smallapp_launcher" 
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.sony.smallapp.intent.action.MAIN" />
+                <category android:name="com.sony.smallapp.intent.category.LAUNCHER" />
+            </intent-filter>
+        </service>
+	</application>
+
+</manifest>
